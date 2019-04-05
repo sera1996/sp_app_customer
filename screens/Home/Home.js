@@ -5,9 +5,11 @@ import {
     Image,
     ScrollView
 } from "react-native";
-import { Container, Header, View, DeckSwiper, Card, 
-    CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
+import { Container, Header, View, DeckSwiper, 
+    Card, CardItem, Thumbnail, Text, 
+    Left, Body, Icon,Drawer,Button,Title,Right,InputGroup, Input } from 'native-base';
 import Stylist from './Tags/Stylist'
+import SideBar from './SideBar';
 const Pics =[
   {id:'1',uri: require('../../assets/biyoushi3.jpg')},
   {id:'2',uri: require('../../assets/biyoushi2.jpg')},
@@ -26,13 +28,33 @@ const cards = [
     }
 ]
 class Home extends Component {
+    closeDrawer = () => {
+        this._drawer._root.close();
+    }
+    openDrawer = () => {
+        //alert('open');
+        this._drawer._root.open();
+    }
     navigateToProfile(press){
         this.props.navigation.navigate('Profile',{press});
     }
     render() {
         return (
+           <Drawer 
+                ref={(ref)=>{this._drawer=ref;}}
+                        content={<SideBar/>}> 
         <Container>
-                <Header style={{backgroundColor:'#fd7166'}}></Header>
+                <Header style={{backgroundColor:'#fd7166'}}>
+                    <Left>
+                        <Button transparent onPress={this.openDrawer.bind(this)}>
+                            <Icon style={styles.icon} name='list' />
+                        </Button> 
+                    </Left>
+                    <InputGroup borderType= 'underline'style={{marginTop:5,backgroundColor:'#fff',width:180,height:25}}>
+                        <Icon name="ios-search" style={{color:'#fd7166'}}/>
+                        <Input style={{color: '#00c497'}} placeholder="お悩みタグ"/>
+                    </InputGroup> 
+                </Header>
                 <DeckSwiper
             dataSource={cards}
             renderItem={item =>
@@ -50,7 +72,9 @@ class Home extends Component {
                   <Image style={{ height: 300, flex: 1 }} source={item.image} />
                 </CardItem>
                 <CardItem>
+                {/*
                   <Icon name="heart" style={{ color: '#ED4A6A' }} />
+                  */}
                   <Text>{item.name}</Text>
                   <TouchableOpacity>
                     <Icon name='logo-twitter' style={{color:'#ed4a6a',marginLeft:150}}/>
@@ -97,10 +121,9 @@ class Home extends Component {
                             Go to Profile
                         </Text>
                     </TouchableOpacity>
-
-                    
                 </View>
           </Container>
+          </Drawer>
           
         );
     }
@@ -128,5 +151,9 @@ const styles = StyleSheet.create({
         paddingLeft:15,
         color:'#fff',
         fontSize:14
+    },
+    icon:{
+        color:'#fff',
+        fontSize:40,
     }
 });

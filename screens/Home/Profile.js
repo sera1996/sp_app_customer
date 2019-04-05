@@ -61,7 +61,20 @@ class Profile extends Component {
         else if(num==1){
             return(
                 <View>
-                <Text style={{textAlign:'center'}}>神奈川県藤沢市遠藤3607-8ベルツリーsfc207</Text>
+                    <View style ={{flexDirection:'row',marginTop:10}}>
+                        <Text style={{marginLeft:30,textAlign:'center'}}>住所</Text> 
+                        <Text style={{ marginLeft:30,flex:1,textAlign:'center'}}>神奈川県藤沢市遠藤3607-8ベルツリーsfc207</Text>
+                    </View>
+                    <View
+                        style={{
+                            marginTop:10,
+                            borderBottomColor: 'black',
+                            borderBottomWidth: 1,
+                            }}
+                    />
+                    <View style={{flexDirection:'row',marginTop:20}}>
+                        <Text style ={{}}></Text>
+                    </View>
                 </View>
             );
         }
