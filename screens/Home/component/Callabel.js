@@ -11,11 +11,11 @@ class Callabel extends Component {
         return (
             <View>
                 <Text></Text>
-                <TouchableOpacity style={styles.calLabel}>
+                <View style={styles.calLabel}>
                     <Text style={{textAlign:'center',marginTop:12}}>
                         {this.props.day}
                     </Text>
-                </TouchableOpacity>
+                </View>
             </View>
         );
     }
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
         height:50,
         width:50,
         borderRadius:25,
-        borderWidth:0.5
+        borderWidth:0.5,
+        borderColor:'#000000'
     }
 });

@@ -7,16 +7,39 @@ import {
 } from "react-native";
 
 class Calcomp extends Component {
+    constructor(props){
+        super(props);
+        this.state={
+            compDesign:{
+                marginLeft:25,
+                height:40,
+                width:40,
+                backgroundColor:'#fd7166',
+                borderRadius:20,
+                borderWidth:0.5,
+                borderColor:'#ffffff'
+            },
+            compDesign2:{
+                marginLeft:25,
+                height:40,
+                width:40,
+                backgroundColor:'#33b661',
+                borderRadius:20,
+                borderWidth:0.5,
+                borderColor:'#ffffff'
+            },
+        }
+    }
     render() {
         return (
             <View style={{flexDirection:'row'}}>
             <View>
                 <Text style={{textAlign:'center',marginLeft:20}}>{this.props.label1}</Text>
-                <TouchableOpacity style={styles.calContent}></TouchableOpacity>
+                <TouchableOpacity style={this.state.compDesign}><Text>{this.props.color}</Text></TouchableOpacity>
             </View>
             <View>
                 <Text style={{textAlign:'center',marginLeft:20}}>{this.props.label2}</Text>
-                <TouchableOpacity style={styles.calContent}></TouchableOpacity>
+                <TouchableOpacity style={this.state.compDesign2}></TouchableOpacity>
             </View>
             <View>
             <Text style={{textAlign:'center',marginLeft:20}}>{this.props.label3}</Text>
@@ -39,11 +62,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     calContent:{
-        marginLeft:20,
-        height:50,
-        width:50,
+        marginLeft:25,
+        height:40,
+        width:40,
         backgroundColor:'#fd7166',
-        borderRadius:25,
-        borderWidth:0.5
+        borderRadius:20,
+        borderWidth:0.5,
+        borderColor:'#ffffff'
     }
 });

@@ -7,7 +7,8 @@ import {
 } from "react-native";
 import { Container, Header, View, DeckSwiper, 
     Card, CardItem, Thumbnail, Text, 
-    Left, Body, Icon,Drawer,Button,Title,Right,InputGroup, Input } from 'native-base';
+    Left, Body, Icon,Drawer,Button,Title,Right,
+    InputGroup, Input, Item } from 'native-base';
 import Stylist from './Tags/Stylist'
 import SideBar from './SideBar';
 const Pics =[
@@ -44,16 +45,23 @@ class Home extends Component {
                 ref={(ref)=>{this._drawer=ref;}}
                         content={<SideBar/>}> 
         <Container>
-                <Header style={{backgroundColor:'#fd7166'}}>
+                <Header searchBar rounded style={{backgroundColor:'transparent'}}>
                     <Left>
                         <Button transparent onPress={this.openDrawer.bind(this)}>
                             <Icon style={styles.icon} name='list' />
                         </Button> 
                     </Left>
+                    {/*
                     <InputGroup borderType= 'underline'style={{marginTop:5,backgroundColor:'#fff',width:180,height:25}}>
                         <Icon name="ios-search" style={{color:'#fd7166'}}/>
                         <Input style={{color: '#00c497'}} placeholder="お悩みタグ"/>
-                    </InputGroup> 
+                    </InputGroup>
+                    */}
+                    <Item>
+                        <Icon name="ios-search"/>
+                        <Input placeholder="検索"/>
+                    </Item>
+                    
                 </Header>
                 <DeckSwiper
             dataSource={cards}
@@ -153,7 +161,7 @@ const styles = StyleSheet.create({
         fontSize:14
     },
     icon:{
-        color:'#fff',
+        color:'#fd7166',
         fontSize:40,
     }
 });

@@ -9,6 +9,7 @@ import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, L
 
 
 class Calendars extends Component {
+    
     navigateToConfirm(){
         this.props.navigation.navigate('Confirm');
     }
@@ -18,7 +19,7 @@ class Calendars extends Component {
     render() {
         return (
             <Container>
-                <Header style={{backgroundColor:'#fd7166'}}>
+                <Header style={{backgroundColor:'transparent'}}>
                     <Left>
                     <TouchableOpacity onPress={()=>this.backToProfile()}>
                         <Text>Back</Text>
@@ -28,56 +29,11 @@ class Calendars extends Component {
                 <TouchableOpacity onPress={()=>this.navigateToConfirm()}>
                     <Text>Confirmation</Text>
                 </TouchableOpacity>
-                {/*<Calendar/>*/}
-                <View>
-                    <View style={{flexDirection:'row'}}>
-                    <View style={{marginLeft:80}}><Text></Text></View>
-                    <View style={{paddingLeft:20,paddingRight:20,paddingTop:10,paddingBottom:10,borderWidth:0.5,borderColor:'black'}}>
-                        <View style={{flexDirection:'row'}}>
-                            <View style={{height:20,width:20,backgroundColor:'red',borderRadius:10,borderWidth:0.5,backgroundColor:'#01DF74'}}></View>
-                            <Text>O - オープン</Text>
-                        </View>
-                        <View style={{flexDirection:'row'}}>
-                            <View style={{height:20,width:20,backgroundColor:'red',borderRadius:10,borderWidth:0.5,backgroundColor:'#F7D358'}}></View>
-                            <Text>C - 美容師さんに要確認</Text>
-                        </View>
-                        <View style={{flexDirection:'row'}}>
-                            <View style={{height:20,width:20,backgroundColor:'red',borderRadius:10,borderWidth:0.5,backgroundColor:'#fd7166'}}></View>
-                            <Text>R/B -　予約有り</Text>
-                        </View>
-                        <View style={{flexDirection:'row'}}>
-                            <View style={{height:20,width:20,backgroundColor:'red',borderRadius:10,borderWidth:0.5,backgroundColor:'#fd7166'}}></View>
-                            <Text>Blocked</Text>
-                        </View>
-                    </View>
-                    <View><Text></Text></View>
-                    </View>
-                    <View style={{flexDirection:'row'}}>
-                        <Text style={{fontSize:24,marginTop:20,marginLeft:20}}>9月</Text>
-                    </View>
-                    <View style={{flexDirection:'row',marginTop:10}}>
-                        <Callabel day="3"/>
-                        <Calcomp label1="9~12" label2="12~15" label3="15~18" label4="18~21"/>
-                    </View>
-                    <View style={{flexDirection:'row',marginTop:10}}>
-                        <Callabel day="4"/>
-                        <Calcomp label1="9~12" label2="12~15" label3="15~18" label4="18~21"/>
-                    </View>
-                    <View style={{flexDirection:'row',marginTop:10}}>
-                        <Callabel day="5"/>
-                        <Calcomp label1="9~12" label2="12~15" label3="15~18" label4="18~21"/>
-                    </View>
-                    <View style={{flexDirection:'row',marginTop:10}}>
-                        <Callabel day="6"/>
-                        <Calcomp label1="9~12" label2="12~15" label3="15~18" label4="18~21"/>
-                    </View>
-                    <View style={{flexDirection:'row',marginTop:10}}>
-                        <Callabel day="7"/>
-                        <Calcomp label1="9~12" label2="12~15" label3="15~18" label4="18~21"/>
-                    </View>
-                    <View style={{flexDirection:'row',marginTop:10}}>
-                        <Callabel day="8"/>
-                        <Calcomp label1="9~12" label2="12~15" label3="15~18" label4="18~21"/>
+                <View style={styles.profileStyle}>
+                    <Text style={{color:'#fd7166',fontSize:14,marginTop:10,marginLeft:10}}>施術名:デジタルパーマ</Text>
+                    <View style={{flexDirection:'row',marginTop:10,marginLeft:10}}>
+                    <Text style={{color:'#fd7166',fontSize:14}}>施術料金:5600円</Text>
+                    <Text style={{color:'#fd7166',fontSize:14,marginLeft:20}}>施術時間:2時間</Text>
                     </View>
                 </View>
         </Container>
@@ -106,5 +62,18 @@ const styles = StyleSheet.create({
         width:50,
         borderRadius:25,
         borderWidth:0.5
-    }
+    },
+    profileStyle:{
+        marginTop:30,
+        marginLeft:60,
+        marginRight:60,
+        backgroundColor:'#fbfafa',
+        borderRadius:15,
+        borderWidth:1,
+        borderColor:'#f8f8f8',
+        height:70,
+        shadowColor:"black",
+        shadowOffset:{height:2},
+        shadowOpacity:0.3,
+    },
 });

@@ -8,8 +8,10 @@ import {
 class Confirm extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text>Confirm</Text>
+            <View>
+                <Text>予約確認</Text>
+                <Text>性</Text>
+                <Text>名</Text>
             </View>
         );
     }
