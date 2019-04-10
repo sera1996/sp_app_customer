@@ -4,12 +4,14 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
-    ScrollView
+    ScrollView,
+    TouchableHighlight
 } from "react-native";
 import { Container, Header, View, DeckSwiper, 
     Card, CardItem, Thumbnail, Text, 
     Left, Body, Icon,Input,InputGroup } from 'native-base';
 import StoreInfo from './component/StoreInfo';
+import MyAppText from './../../assets/MyAppText';
 import Menu from './component/Menu';
 const Pics =[
   {id:'1',uri: require('../../assets/biyoushi3.jpg')},
@@ -32,7 +34,6 @@ class Profile extends Component {
     }
     checkLine(num){
         this.setState({menuNum:num});
-        console.log(this.state.menuNum);
         this.menuContent(num);
     }
     backToHome(){
@@ -66,12 +67,16 @@ class Profile extends Component {
         else if(num==1){
             return(
                 <View style={{flex:1}}>
-                <Text note style={{marginTop:10,marginLeft:30}}>店舗住所</Text>
+                <View>
+                <Text note style={{marginLeft:30}}>店舗住所</Text>
+                </View>
                 <View style={{marginTop:10,marginLeft:20,marginRight:70,flexDirection:'row'}}>
                         <Icon name="send" style={{color:'#fd7166'}}/>
                         <Text style={{mariginTop:5,marginLeft:10}}>神奈川県藤沢市湘南台西村ビル2階201</Text>
                 </View>
-                <Text note style={{marginTop:30,marginLeft:30}}>店舗写真</Text>
+                <View style={{marginTop:30}}>
+                <Text note style={{marginLeft:30}}>店舗写真</Text>
+                </View>
                 <View>
                     <Image style={{borderRadius:20,width:240,height:140,marginLeft:70,marginTop:10}} source={require('../../assets/biyoushitu.jpg')}/>
                 </View>
@@ -99,22 +104,28 @@ class Profile extends Component {
                     </View>
                 </View>
                 <TouchableOpacity style={styles.profileStyle}>
-
-                    <Text style={{marginTop:5,marginLeft:5}}>星野　リサ</Text>
-                    <Text style={{marginTop:5,marginLeft:5,fontSize:11}}>
-                        初めて行ったサロンでしたがカラーの仕上がりが
-                        とても良く、カットも希望通りにしていただけたので
-                        とても満足しました。
-                    </Text>
+                    <View style={{marginTop:5,marginLeft:5}}>
+                        <Text>星野　リサ</Text>
+                    </View>
+                    <View style={{marginTop:5,marginLeft:5}}>
+                        <Text style={{fontSize:11}}>
+                            初めて行ったサロンでしたがカラーの仕上がりが
+                            とても良く、カットも希望通りにしていただけたので
+                            とても満足しました。
+                        </Text>
+                    </View>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.profileStyle}>
-
-                    <Text style={{marginTop:5,marginLeft:5}}>星野　リサ</Text>
-                    <Text style={{marginTop:5,marginLeft:5,fontSize:11}}>
-                        初めて行ったサロンでしたがカラーの仕上がりが
-                        とても良く、カットも希望通りにしていただけたので
-                        とても満足しました。
-                    </Text>
+                    <View style={{marginTop:5,marginLeft:5}}>
+                        <Text>星野　リサ</Text>
+                    </View>
+                    <View style={{marginTop:5,marginLeft:5}}>
+                        <Text style={{fontSize:11}}>
+                            初めて行ったサロンでしたがカラーの仕上がりが
+                            とても良く、カットも希望通りにしていただけたので
+                            とても満足しました。
+                        </Text>
+                    </View>
                 </TouchableOpacity>
                 </View>
             );
@@ -123,23 +134,23 @@ class Profile extends Component {
             return(
                 <View>
                     <View style={{flexDirection:'row',marginTop:20}}>
-                        <Text style={{flex:2,marginLeft:20,fontSiz:14}}>寺岡さんの利用している商品</Text>
+                        <Text style={{flex:2,marginLeft:20,fontSize:14}}>寺岡さんの利用している商品</Text>
                         <Text style={{flex:1,fontSize:14,marginLeft:20,color:'#fd7166',textAlign:'center',marginRight:20}}>SEE ALL</Text>
                     </View>
                     <View style={{flexDirection:'row',marginTop:20}}>
                         <View style={{flex:1,alignItems:'center'}}>
-                            <Image source = {require('../../assets/brory.jpg')} style={{width:90,height:90}}/>
+                            <Image source = {require('../../assets/brory.jpg')} style={{borderRadius:25,width:90,height:90}}/>
                         </View>
                         <View style={{flex:1,alignItems:'center'}}>
-                            <Image source = {require('../../assets/brory.jpg')} style={{width:90,height:90}}/>
+                            <Image source = {require('../../assets/brory.jpg')} style={{borderRadius:25,width:90,height:90}}/>
                         </View>
                         <View style={{flex:1,alignItems:'center'}}>
-                            <Image source = {require('../../assets/brory.jpg')} style={{width:90,height:90}}/>
+                            <Image source = {require('../../assets/brory.jpg')} style={{borderRadius:25,width:90,height:90}}/>
                         </View>
                     </View>
                     <View>
                         <View style={{flexDirection:'row',marginTop:20}}>
-                        <Text style={{flex:2,marginLeft:20,fontSiz:14}}>寺岡さんの利用している商品</Text>
+                        <Text style={{flex:2,marginLeft:20,fontSize:14}}>寺岡さんの利用している商品</Text>
                         <Text style={{flex:1,fontSize:14,marginLeft:20,color:'#fd7166',textAlign:'center',marginRight:20}}>SEE ALL</Text>
                     </View>
                     </View>
@@ -149,14 +160,18 @@ class Profile extends Component {
         else if(num==5){
             return(
                 <View>
-                    <View style={{backgroundColor:'#f2f2f2',marginRight:40,marginLeft:40,borderRadius:15,marginTop:25}}>
-                        <Text style={{fontFamily: 'HiraginoSans-W3',marginTop:10,marginLeft:30,marginRight:30,marginBottom:10,fontSize:14}}>
+                    <View style={{backgroundColor:'#f2f2f2',marginRight:40,marginLeft:40,borderRadius:15,marginTop:25,paddingTop:10}}>
+                        <Text style={{marginLeft:30,marginRight:30,marginBottom:10,fontSize:14}}>
                             インスタグラムで人気のウルフカットです。襟足を重めに残して、切りっぱなし感を残してウルフボブ。
                             切りっぱなしボブに飽きた方オススメのウルフカット！
                         </Text>
+                        <MyAppText style={{fontSize:14}}>
+                            インスタグラムで人気のウルフカットです。襟足を重めに残して、切りっぱなし感を残してウルフボブ。
+                            切りっぱなしボブに飽きた方オススメのウルフカット！
+                        </MyAppText>
                     </View>
                     <View style={{marginTop:30,marginLeft:20,flexDirection:'row'}}>
-                    <Text note style={{fontSiz:18}}>仕事歴</Text>
+                    <Text note style={{fontSize:18}}>仕事歴</Text>
                     <Text style={{marginLeft:20}}>16年</Text>
                     </View>
                     <View style={{flexDirection:'row',marginTop:30,marginLeft:20}}>
@@ -197,8 +212,8 @@ class Profile extends Component {
                     style={{marginLeft:120,width:125,height:125,borderRadius:125/2}}
                     source = {Pics[0].uri}/>
                     </View>
-                    <TouchableOpacity style={{flex:1}}>
-                        <Text style={{marginTop:110,fontSize:22,textAlign:'center'}}>
+                    <TouchableOpacity style={{flex:1,marginTop:110}}>
+                        <Text style={{fontSize:22,textAlign:'center'}}>
                         
                         </Text>
                         <Text style={{fontSize:12,textAlign:'center',textDecorationLine:'underline'}}></Text>
@@ -206,8 +221,8 @@ class Profile extends Component {
                 </View>
             <View>
                 <View>
-                    <Text style={{flex:1,textAlign:'center',fontSize:24,fontWeight:'bold'}}>寺岡悠馬</Text>
-                    <Text style={{flex:1,textAlign:'center',fontSize:16}}>@teraokayum</Text>
+                    <Text style={{flex:1,textAlign:'center',fontSize:24,fontWeight:'bold',fontFamily: 'HiraginoSans-W3'}}>寺岡悠馬</Text>
+                    <Text style={{flex:1,textAlign:'center',fontSize:16,fontFamily: 'HiraginoSans-W3'}}>@teraokayum</Text>
                 </View>
             </View>
 
