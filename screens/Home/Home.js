@@ -53,16 +53,34 @@ class Home extends Component {
     navigateToProfile(press){
         this.props.navigation.navigate('Profile',{press});
     }
+    incrementCardIndex(){
+        if(this.state.currentCard+1 < cards.length){
+            this.state.currentCard+= 1;
+        }
+        else{
+            this.state.currentCard = 0;
+        }
+        console.log(this.state.currentCard);
+    }
+    decrementCardIndex(){
+        if(this.state.currentCard -1 <0){
+            this.state.currentCard = cards.length-1;
+        }
+        else{
+            this.state.currentCard -= 1;
+        }
+        console.log(this.state.currentCard);
+    }
     changeBAstate(){
         if(this.state.bastate==0){
             this.setState({bastate:1});
-            cards[0].image = cards[0].image2;
+            cards[this.state.currentCard].image = cards[this.state.currentCard].image2;
             console.log('bastatechanged');
             //console.log(this.state.currentCard);
         }
         else if(this.state.bastate==1){
             this.setState({bastate:0});
-            cards[0].image=cards[0].image1;
+            cards[this.state.currentCard].image=cards[this.state.currentCard].image1;
             console.log('bastatechanged back')
             //console.log(this.state.currentCard);
         }
@@ -93,6 +111,8 @@ class Home extends Component {
                     
                 </Header>
                 <DeckSwiper
+                onSwipeLeft={item=>this.incrementCardIndex()}
+                onSwipeRight={item=>this.decrementCardIndex()}
             dataSource={cards}
             renderItem={item =>
               <Card style={{ elevation: 3 }}>
@@ -160,6 +180,7 @@ class Home extends Component {
                             詳細を見る
                         </Text>
                     </TouchableOpacity>
+                    {/*
                     <TouchableOpacity onPress={()=>console.log(this.state.currentCard)}>
                     <View style={styles.buttonStyle}>
                         <Text 
@@ -168,6 +189,7 @@ class Home extends Component {
                         </Text>
                     </View>
                     </TouchableOpacity>
+                    */}
                     
                 </View>
                 </ScrollView>
