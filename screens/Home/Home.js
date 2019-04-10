@@ -126,7 +126,7 @@ class Home extends Component {
                     <TouchableOpacity style={styles.buttonStyle} onPress={()=>this.navigateToProfile(Pics[0])}>
                         <Text 
                         style={styles.textStyle}>
-                            Go to Profile
+                            詳細を見る
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
         marginTop:5,
         paddingLeft:15,
         color:'#fff',
-        fontSize:14
+        fontSize:14,
+        fontFamily: 'HiraginoSans-W3'
     },
     icon:{
         color:'#fd7166',

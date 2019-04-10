@@ -137,6 +137,12 @@ class Profile extends Component {
                             <Image source = {require('../../assets/brory.jpg')} style={{width:90,height:90}}/>
                         </View>
                     </View>
+                    <View>
+                        <View style={{flexDirection:'row',marginTop:20}}>
+                        <Text style={{flex:2,marginLeft:20,fontSiz:14}}>寺岡さんの利用している商品</Text>
+                        <Text style={{flex:1,fontSize:14,marginLeft:20,color:'#fd7166',textAlign:'center',marginRight:20}}>SEE ALL</Text>
+                    </View>
+                    </View>
                 </View>
             );
         }
@@ -144,10 +150,20 @@ class Profile extends Component {
             return(
                 <View>
                     <View style={{backgroundColor:'#f2f2f2',marginRight:40,marginLeft:40,borderRadius:15,marginTop:25}}>
-                    <Text style={{marginTop:10,marginLeft:30,marginRight:30,marginBottom:10,fontSize:14}}>
-                        インスタグラムで人気のウルフカットです。襟足を重めに残して、切りっぱなし感を残してウルフボブ。
-                        切りっぱなしボブに飽きた方オススメのウルフカット！
-                    </Text>
+                        <Text style={{fontFamily: 'HiraginoSans-W3',marginTop:10,marginLeft:30,marginRight:30,marginBottom:10,fontSize:14}}>
+                            インスタグラムで人気のウルフカットです。襟足を重めに残して、切りっぱなし感を残してウルフボブ。
+                            切りっぱなしボブに飽きた方オススメのウルフカット！
+                        </Text>
+                    </View>
+                    <View style={{marginTop:30,marginLeft:20,flexDirection:'row'}}>
+                    <Text note style={{fontSiz:18}}>仕事歴</Text>
+                    <Text style={{marginLeft:20}}>16年</Text>
+                    </View>
+                    <View style={{flexDirection:'row',marginTop:30,marginLeft:20}}>
+                        <Text note>お悩み解決スキル</Text>
+                        <View style={styles.skillTag}>
+                            <Text>パサつき</Text>
+                        </View>
                     </View>
                 </View>
             )
@@ -166,13 +182,13 @@ class Profile extends Component {
                 <Header style={{backgroundColor:'transparent'}}>
                     <Left>
                     <TouchableOpacity onPress={()=>this.backToHome()}>
-                        <Text>Back</Text>
+                        <Text>戻る</Text>
                     </TouchableOpacity>
                     </Left>
                 </Header>
             <ScrollView>
             <View>
-                <View style={{flexDirection:'row',height:150,marginTop:20}}>
+                <View style={{flexDirection:'row',height:150,marginTop:50}}>
                     <View style={{shadowColor: '#000',
                         shadowOffset: { width: 0, height: 2 },
                         shadowOpacity: 0.4,
@@ -196,24 +212,24 @@ class Profile extends Component {
             </View>
 
                 
-                <ScrollView horizontal='true'style={{flexDirection:'row',marginTop:30}}>
+                <ScrollView horizontal='true'style={{flexDirection:'row',marginTop:70,marginLeft:40}}>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(5)}>
-                        <Text style={{textAlign:'center',fontSize:15}}>詳細</Text>
+                        <Text style={{textAlign:'center',fontSize:18}}>詳細</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(1)}>
-                        <Text style={{textAlign:'center',fontSize:15}}>店舗情報</Text>
+                        <Text style={{textAlign:'center',fontSize:18}}>店舗情報</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(2)}>
-                        <Text style={{textAlign:'center',fontSize:15}}>メニュー</Text>
+                        <Text style={{textAlign:'center',fontSize:18}}>メニュー</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(4)}>
-                        <Text style={{textAlign:'center',fontSize:15}}>化粧品紹介</Text>
+                        <Text style={{textAlign:'center',fontSize:18}}>化粧品紹介</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(3)}>
-                        <Text style={{textAlign:'center',fontSize:15}}>レビュー</Text>
+                        <Text style={{textAlign:'center',fontSize:18}}>レビュー</Text>
                     </TouchableOpacity>
                 </ScrollView>
-                <View>
+                <View style={{marginTop:10}}>
                     {this.menuContent(this.state.menuNum)}
                 </View>
             </View>
@@ -297,7 +313,21 @@ const styles = StyleSheet.create({
         shadowOpacity:0.3,
     },
     scrollMenu:{
-        marginLeft:15,
-        marginRight:15
+        marginLeft:20,
+        marginRight:20
+    },
+    skillTag:{
+        marginTop:15,
+        marginLeft:40,
+        marginRight:200,
+        backgroundColor:'#fbfafa',
+        borderRadius:15,
+        height:25,
+        shadowColor:"black",
+        shadowOffset:{height:1},
+        shadowOpacity:0.3,
+        flexDirection:'row',
+        paddingLeft:10,
+        paddingRight:10
     }
 });

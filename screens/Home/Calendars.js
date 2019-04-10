@@ -6,8 +6,7 @@ import {
 import Calcomp from './component/Calcomp';
 import Callabel from './component/Callabel';
 import { Container, Header, View, DeckSwiper, Card, CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
-
-
+import { Calendar } from 'react-native-calendars';
 class Calendars extends Component {
     
     navigateToConfirm(){
@@ -22,19 +21,43 @@ class Calendars extends Component {
                 <Header style={{backgroundColor:'transparent'}}>
                     <Left>
                     <TouchableOpacity onPress={()=>this.backToProfile()}>
-                        <Text>Back</Text>
+                        <Text>戻る</Text>
                     </TouchableOpacity>
                     </Left>
                 </Header>
-                <TouchableOpacity onPress={()=>this.navigateToConfirm()}>
-                    <Text>Confirmation</Text>
-                </TouchableOpacity>
                 <View style={styles.profileStyle}>
                     <Text style={{color:'#fd7166',fontSize:14,marginTop:10,marginLeft:10}}>施術名:デジタルパーマ</Text>
                     <View style={{flexDirection:'row',marginTop:10,marginLeft:10}}>
                     <Text style={{color:'#fd7166',fontSize:14}}>施術料金:5600円</Text>
                     <Text style={{color:'#fd7166',fontSize:14,marginLeft:20}}>施術時間:2時間</Text>
                     </View>
+                </View>
+                <View style={{marginTop:20}}>
+                    <Calendar
+                    theme={{
+                    selectedDayBackgroundColor: '#65DEF6',
+                    selectedDayTextColor: '#000000',
+                }}
+                markedDates={{
+                    '2019-04-10': {selected: true},
+                }}/>
+                </View>
+                <View>
+                    <Text note style={{marginLeft:30}}>空いている時間帯</Text>
+                </View>
+                <View style={{flexDirection:'row',marginLeft:20}}>
+                    <TouchableOpacity style={styles.timeStyle} onPress={()=>this.navigateToConfirm()}>
+                        <Text style={styles.timeTextStyle}>11:00</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.timeStyle} onPress={()=>this.navigateToConfirm()}>
+                        <Text style={styles.timeTextStyle}>12:00</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.timeStyle} onPress={()=>this.navigateToConfirm()}>
+                        <Text style={styles.timeTextStyle}>13:00</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.timeStyle} onPress={()=>this.navigateToConfirm()}>
+                        <Text style={styles.timeTextStyle}>14:00</Text>
+                    </TouchableOpacity>
                 </View>
         </Container>
         );
@@ -76,4 +99,20 @@ const styles = StyleSheet.create({
         shadowOffset:{height:2},
         shadowOpacity:0.3,
     },
+    timeStyle:{
+        marginTop:15,
+        marginLeft:5,
+        marginRight:5,
+        backgroundColor:'#65DEF6',
+        height:25,
+        shadowColor:"black",
+        shadowOffset:{height:1},
+        shadowOpacity:0.3,
+        flexDirection:'row'
+    },
+    timeTextStyle:{
+        fontSize:14,
+        paddingLeft:5,
+        paddingRight:5
+    }
 });
