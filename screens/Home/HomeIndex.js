@@ -13,6 +13,7 @@ import Profile from './Profile';
 import Calendars from './Calendars';
 import Confirm from './Confirm';
 import Monsi from './Monsi';
+import ProductList from './ProductList';
 
 
 class Talon extends Component {
@@ -60,6 +61,12 @@ const RootStack = createStackNavigator({
     },
     Monsi:{
         screen:Monsi,
+        navigationOptions:()=>({
+            header:null
+        })
+    },
+    ProductList:{
+        screen:ProductList,
         navigationOptions:()=>({
             header:null
         })

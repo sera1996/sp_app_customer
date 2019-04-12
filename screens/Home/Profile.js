@@ -39,6 +39,9 @@ class Profile extends Component {
     backToHome(){
         this.props.navigation.navigate('Home');
     }
+    navigateToProductList(){
+        this.props.navigation.navigate('ProductList');
+    }
     menuContent(num){
         if(num==2){
             return(
@@ -66,7 +69,7 @@ class Profile extends Component {
         }
         else if(num==1){
             return(
-                <View style={{flex:1}}>
+                <View style={{flex:1,marginTop:20}}>
                 <View>
                 <Text note style={{marginLeft:30}}>店舗住所</Text>
                 </View>
@@ -105,8 +108,13 @@ class Profile extends Component {
                 </View>
                 <TouchableOpacity style={styles.profileStyle}>
                     <View style={{marginTop:5,marginLeft:5}}>
-                        <Text>星野　リサ</Text>
+                        <Text style={{fontSize:12,fontWeight:'bold'}}>星野　リサ</Text>
                     </View>
+                    <Rating
+                            style={{marginRight:180,marginTop:5}}
+                            imageSize={12}
+                            startingValue={3}
+                            />
                     <View style={{marginTop:5,marginLeft:5}}>
                         <Text style={{fontSize:11}}>
                             初めて行ったサロンでしたがカラーの仕上がりが
@@ -117,8 +125,13 @@ class Profile extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.profileStyle}>
                     <View style={{marginTop:5,marginLeft:5}}>
-                        <Text>星野　リサ</Text>
+                        <Text style={{fontSize:12,fontWeight:'bold'}}>星野　リサ</Text>
                     </View>
+                    <Rating
+                            style={{marginRight:180,marginTop:5}}
+                            imageSize={12}
+                            startingValue={3}
+                            />
                     <View style={{marginTop:5,marginLeft:5}}>
                         <Text style={{fontSize:11}}>
                             初めて行ったサロンでしたがカラーの仕上がりが
@@ -135,24 +148,111 @@ class Profile extends Component {
                 <View>
                     <View style={{flexDirection:'row',marginTop:20}}>
                         <Text style={{flex:2,marginLeft:20,fontSize:14}}>寺岡さんの利用している商品</Text>
-                        <Text style={{flex:1,fontSize:14,marginLeft:20,color:'#fd7166',textAlign:'center',marginRight:20}}>SEE ALL</Text>
+                        <TouchableOpacity onPress={()=>this.navigateToProductList()}>
+                            <Text style={{flex:1,fontSize:14,marginLeft:20,color:'#fd7166',textAlign:'center',marginRight:20}}>SEE ALL</Text>
+                        </TouchableOpacity>
                     </View>
-                    <View style={{flexDirection:'row',marginTop:20}}>
-                        <View style={{flex:1,alignItems:'center'}}>
-                            <Image source = {require('../../assets/brory.jpg')} style={{borderRadius:25,width:90,height:90}}/>
+                    <ScrollView horizontal='true' style={{flexDirection:'row',marginTop:20}}>
+                    <View style = {{height:150,width:120,
+                        marginLeft:20,borderWidth:0.5,borderColor:'#ffffff',borderRadius:5}}>
+                        <View style = {{flex:2}}>
+                            <Image source = {require('../../assets/dryer.jpg')}
+                            style = {{flex:1,width:90,height:90,marginLeft:15,resizeMode:'cover'}}/>
                         </View>
-                        <View style={{flex:1,alignItems:'center'}}>
-                            <Image source = {require('../../assets/brory.jpg')} style={{borderRadius:25,width:90,height:90}}/>
-                        </View>
-                        <View style={{flex:1,alignItems:'center'}}>
-                            <Image source = {require('../../assets/brory.jpg')} style={{borderRadius:25,width:90,height:90}}/>
-                        </View>
+                    <View style = {{flex:1,textAlign:'center',paddingTop:10}}>
+                        <Text note style={{textAlign:'center'}}>
+                            LOUVREDO
+                        </Text>
+                        <Text style={{textAlign:'center',fontSize:12}}>
+                            10000円
+                        </Text>
                     </View>
+                </View>
+                        <View style = {{height:150,width:120,
+                        marginLeft:20,borderWidth:0.8,borderColor:'#ffffff'}}>
+                        <View style = {{flex:2}}>
+                            <Image source = {require('../../assets/spray.jpg')}
+                            style = {{flex:1,width:90,height:90,marginLeft:15,resizeMode:'cover'}}/>
+                        </View>
+                    <View style = {{flex:1,textAlign:'center',paddingTop:10}}>
+                        <Text note style={{textAlign:'center'}}>
+                            ナプラN
+                        </Text>
+                        <Text style={{textAlign:'center',fontSize:12}}>
+                            3600円
+                        </Text>
+                    </View>
+                    </View>
+                        <View style = {{height:150,width:120,
+                        marginLeft:20,borderWidth:0.8,borderColor:'#ffffff'}}>
+                        <View style = {{flex:2}}>
+                            <Image source = {require('../../assets/liquid.jpg')}
+                            style = {{flex:1,width:90,height:90,marginLeft:15,resizeMode:'cover'}}/>
+                        </View>
+                    <View style = {{flex:1,textAlign:'center',paddingTop:10}}>
+                        <Text note style={{textAlign:'center'}}>
+                            LOUVREDO
+                        </Text>
+                        <Text style={{textAlign:'center',fontSize:12}}>
+                            10000円
+                        </Text>
+                    </View>
+                </View>
+                    </ScrollView>
                     <View>
                         <View style={{flexDirection:'row',marginTop:20}}>
-                        <Text style={{flex:2,marginLeft:20,fontSize:14}}>寺岡さんの利用している商品</Text>
-                        <Text style={{flex:1,fontSize:14,marginLeft:20,color:'#fd7166',textAlign:'center',marginRight:20}}>SEE ALL</Text>
+                        <Text style={{flex:2,marginLeft:20,fontSize:14}}>Xさんのお悩みにオススメの商品</Text>
+                        <TouchableOpacity>
+                            <Text style={{flex:1,fontSize:14,marginLeft:20,color:'#fd7166',textAlign:'center',marginRight:20}}>SEE ALL</Text>
+                        </TouchableOpacity>
                     </View>
+                    <ScrollView horizontal='true' style={{flexDirection:'row',marginTop:20}}>
+                    <View style = {{height:150,width:120,
+                        marginLeft:20,borderWidth:0.5,borderColor:'#ffffff'}}>
+                        <View style = {{flex:2}}>
+                            <Image source = {require('../../assets/dryer.jpg')}
+                            style = {{flex:1,width:90,height:90,marginLeft:15,resizeMode:'cover'}}/>
+                        </View>
+                    <View style = {{flex:1,textAlign:'center',paddingTop:10}}>
+                        <Text note style={{textAlign:'center'}}>
+                            LOUVREDO
+                        </Text>
+                        <Text style={{textAlign:'center'}}>
+                            10000円
+                        </Text>
+                    </View>
+                </View>
+                        <View style = {{height:150,width:120,
+                        marginLeft:20,borderWidth:0.8,borderColor:'#ffffff'}}>
+                        <View style = {{flex:2}}>
+                            <Image source = {require('../../assets/spray.jpg')}
+                            style = {{flex:1,width:90,height:90,marginLeft:15,resizeMode:'cover'}}/>
+                        </View>
+                    <View style = {{flex:1,textAlign:'center',paddingTop:10}}>
+                        <Text note style={{textAlign:'center'}}>
+                            ナプラN
+                        </Text>
+                        <Text style={{textAlign:'center'}}>
+                            3600円
+                        </Text>
+                    </View>
+                    </View>
+                        <View style = {{height:150,width:120,
+                        marginLeft:20,borderColor:'#ffffff'}}>
+                        <View style = {{flex:2}}>
+                            <Image source = {require('../../assets/liquid.jpg')}
+                            style = {{flex:1,width:90,height:90,marginLeft:15,resizeMode:'cover'}}/>
+                        </View>
+                    <View style = {{flex:1,textAlign:'center',paddingTop:10}}>
+                        <Text note style={{textAlign:'center'}}>
+                            LOUVREDO
+                        </Text>
+                        <Text style={{textAlign:'center'}}>
+                            10000円
+                        </Text>
+                    </View>
+                </View>
+                    </ScrollView>
                     </View>
                 </View>
             );
@@ -160,7 +260,7 @@ class Profile extends Component {
         else if(num==5){
             return(
                 <View>
-                    <View style={{backgroundColor:'#f2f2f2',marginRight:40,marginLeft:40,borderRadius:15,marginTop:25,paddingTop:10}}>
+                    <View style={{backgroundColor:'#ffffff',marginRight:40,marginLeft:40,borderRadius:15,marginTop:25,paddingTop:10}}>
                         <Text style={{marginLeft:30,marginRight:30,marginBottom:10,fontSize:14}}>
                             インスタグラムで人気のウルフカットです。襟足を重めに残して、切りっぱなし感を残してウルフボブ。
                             切りっぱなしボブに飽きた方オススメのウルフカット！
@@ -212,12 +312,7 @@ class Profile extends Component {
                     style={{marginLeft:120,width:125,height:125,borderRadius:125/2}}
                     source = {Pics[0].uri}/>
                     </View>
-                    <TouchableOpacity style={{flex:1,marginTop:110}}>
-                        <Text style={{fontSize:22,textAlign:'center'}}>
-                        
-                        </Text>
-                        <Text style={{fontSize:12,textAlign:'center',textDecorationLine:'underline'}}></Text>
-                    </TouchableOpacity>
+
                 </View>
             <View>
                 <View>
@@ -227,21 +322,21 @@ class Profile extends Component {
             </View>
 
                 
-                <ScrollView horizontal='true'style={{flexDirection:'row',marginTop:70,marginLeft:40}}>
+                <ScrollView horizontal='true'style={{flexDirection:'row',marginTop:50,marginLeft:40}}>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(5)}>
-                        <Text style={{textAlign:'center',fontSize:18}}>詳細</Text>
+                        <Text style={{textAlign:'center',fontSize:14}}>詳細</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(1)}>
-                        <Text style={{textAlign:'center',fontSize:18}}>店舗情報</Text>
+                        <Text style={{textAlign:'center',fontSize:14}}>店舗情報</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(2)}>
-                        <Text style={{textAlign:'center',fontSize:18}}>メニュー</Text>
+                        <Text style={{textAlign:'center',fontSize:14}}>メニュー</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(4)}>
-                        <Text style={{textAlign:'center',fontSize:18}}>化粧品紹介</Text>
+                        <Text style={{textAlign:'center',fontSize:14}}>化粧品紹介</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.scrollMenu} onPress={()=>this.checkLine(3)}>
-                        <Text style={{textAlign:'center',fontSize:18}}>レビュー</Text>
+                        <Text style={{textAlign:'center',fontSize:14}}>レビュー</Text>
                     </TouchableOpacity>
                 </ScrollView>
                 <View style={{marginTop:10}}>
@@ -257,8 +352,7 @@ export default Profile;
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center',
-        justifyContent: 'center'
+        backgroundColor:'#f5f6f8'
     },
     buttonStyle1:{
         flex:1,
@@ -315,17 +409,14 @@ const styles = StyleSheet.create({
         shadowOpacity:0.3
     },
     profileStyle:{
-        marginTop:30,
+        marginTop:20,
         marginLeft:60,
         marginRight:60,
-        backgroundColor:'#fbfafa',
+        backgroundColor:'#ffffff',
         borderRadius:15,
         borderWidth:1,
-        borderColor:'#f8f8f8',
-        height:90,
-        shadowColor:"black",
-        shadowOffset:{height:2},
-        shadowOpacity:0.3,
+        borderColor:'#ffffff',
+        height:90
     },
     scrollMenu:{
         marginLeft:20,

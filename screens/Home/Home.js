@@ -4,7 +4,9 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    Dimensions,
+    Animated,PanResponder
 } from "react-native";
 import { Container, Header, View, DeckSwiper, 
     Card, CardItem, Thumbnail, Text, 
@@ -13,9 +15,10 @@ import { Container, Header, View, DeckSwiper,
 import Stylist from './Tags/Stylist'
 import SideBar from './SideBar';
 const Pics =[
-  {id:'1',uri: require('../../assets/biyoushi3.jpg')},
-  {id:'2',uri: require('../../assets/biyoushi2.jpg')},
-  {id:'3',uri: require('../../assets/biyoushi1.jpg')},
+  {id:'1',uri: require('../../assets/photo1.jpg')},
+  {id:'2',uri: require('../../assets/photo2.jpg')},
+  {id:'3',uri: require('../../assets/photo3.jpg')},
+  {id:'4',uri: require('../../assets/photo4.jpg')},
 ];
 let cards = [
     {
@@ -35,14 +38,137 @@ let cards = [
         image2:require('../../assets/photo4.jpg')
     }
 ]
+const SCREEN_HEIGHT = Dimensions.get('window').height;
+const SCREEN_WIDTH = Dimensions.get('window').width;
 class Home extends Component {
     constructor(props){
         super(props);
+        this.position = new Animated.ValueXY()
         this.state={
             bastate:0,
-            currentCard:0
+            currentCard:0,
+            currentIndex:0
         }
+        this.rotate = this.position.x.interpolate({
+    inputRange:[-SCREEN_WIDTH/2,0,SCREEN_WIDTH/2],
+    outputRange:['-5deg','0deg','5deg'],
+    extrapolate:'clamp'
+  })
+  this.rotateAndTranslate ={
+    transform:[{
+      rotate:this.rotate
+    },
+  ...this.position.getTranslateTransform()]
+  }
+this.likeOpacity = this.position.x.interpolate({
+  inputRange:[-SCREEN_WIDTH/2,0,SCREEN_WIDTH/2],
+  outputRange:[0,0,1],
+  extrapolate:'clamp'
+})
+this.dislikeOpacity = this.position.x.interpolate({
+  inputRange:[-SCREEN_WIDTH/2,0,SCREEN_WIDTH/2],
+  outputRange:[1,0,0],
+  extrapolate:'clamp'
+})
+this.nextCardOpacity = this.position.x.interpolate({
+  inputRange:[-SCREEN_WIDTH/2,0,SCREEN_WIDTH/2],
+  outputRange:[1,0,1],
+  extrapolate:'clamp'
+})
+this.nextCardScale = this.position.x.interpolate({
+  inputRange:[-SCREEN_WIDTH/2,0,SCREEN_WIDTH/2],
+  outputRange:[1,0.8,1],
+  extrapolate:'clamp'
+})
+}
+componentWillMount(){
+    this.PanResponder = PanResponder.create({
+      onStartShouldSetPanResponder:(evt,gestureState) => true,
+      onPanResponderMove:(evt,gestureState)=>{
+        this.position.setValue({x:gestureState.dx,y:0})
+      },
+      onPanResponderRelease:(evt,gestureState)=>{
+        if(gestureState.dx>120){
+          Animated.spring(this.position,{
+            toValue:{x:SCREEN_WIDTH+100,y:gestureState.dy}
+          }).start(()=>{
+            this.setState({currentIndex:this.state.currentIndex+1},()=>{
+            this.position.setValue({x:0,y:0})
+          })
+          })
+        }
+        else if(gestureState.dx< -120){
+          Animated.spring(this.position,{
+            toValue:{x:-SCREEN_WIDTH-100,y:gestureState.dy}
+          }).start(()=>{
+            this.setState({currentIndex:this.state.currentIndex+1},()=>{
+            this.position.setValue({x:0,y:0})
+          })
+          })
+        }
+        else{
+          Animated.spring(this.position,{
+            toValue:{x:0,y:0},
+            friction:4
+          }).start()
+        }
+      }
+    })
+  }
+  renderPics = () =>{
+    return Pics.map((item,i)=>{
+      if(i<this.state.currentIndex)
+      {
+        return null
+      }
+      else if(i==this.state.currentIndex){
+      return(
+      <Animated.View 
+      {...this.PanResponder.panHandlers}
+      key={item.id} style={[this.rotateAndTranslate,
+      {height:420,width:SCREEN_WIDTH-60,padding:7,marginLeft:30,position:'absolute',marginTop:20}]}>
+            <View>
+            <Image style={{height:300,width:300,borderBottomRightRadius:10}}
+              source={item.uri}/>
+              </View>
+              <View style={{flexDirection:'row',backgroundColor:'#ffffff',height:80}}>
+                  <Image style={{height:50,width:50,borderRadius:25,marginLeft:20,marginTop:15,marginBottom:10}} source={item.uri}/>
+                  <View style={{marginTop:10}}/>
+                    <View>
+                        <Text style={{marginLeft:20,marginTop:20}}>河野勇輝</Text>
+                        <Text note style={{marginLeft:20}}>@teraokayum</Text>
+                    </View>
+                  </View>
+      </Animated.View>
+      )}
+      else if(i == this.state.currentIndex+1){
+        return(
+      <Animated.View 
+      key={item.id} style={[
+      {opacity:this.nextCardOpacity,transform:[{scale:this.nextCardScale}],
+      height:420,width:SCREEN_WIDTH-60,marginLeft:30,padding:7,position:'absolute',marginTop:20}]}>
+            <Image
+              style={{flex:1,height:300,width:300,resizeMode:'cover',borderRadius:0,
+              shadowColor:"black",
+              shadowOffset:{height:2},
+              shadowOpacity:0.3}}
+              source={item.uri}/>
+              <View style={{flexDirection:'row',backgroundColor:'#ffffff',height:80}}>
+                  <Image style={{height:50,width:50,borderRadius:25,marginLeft:20,marginTop:15,marginBottom:10}} source={item.uri}/>
+                  <View style={{marginTop:10}}/>
+                  <View>
+                  <Text style={{marginLeft:20,marginTop:20}}>河野勇輝</Text>
+                  <Text note style={{marginLeft:20}}>@teraokayum</Text>
+                  </View>
+                  </View>
+          </Animated.View>
+      )
+      }
+    else{
+      return null
     }
+    }).reverse()
+  }
     closeDrawer = () => {
         this._drawer._root.close();
     }
@@ -90,32 +216,46 @@ class Home extends Component {
            <Drawer 
                 ref={(ref)=>{this._drawer=ref;}}
                         content={<SideBar/>}> 
-        <Container>
-            <ScrollView>
+        <Container style={{backgroundColor:'#f5f6f8'}}>
                 <Header searchBar rounded style={{backgroundColor:'transparent'}}>
                     <Left>
                         <Button transparent onPress={this.openDrawer.bind(this)}>
                             <Icon style={styles.icon} name='list' />
                         </Button> 
                     </Left>
+                    
                     {/*
                     <InputGroup borderType= 'underline'style={{marginTop:5,backgroundColor:'#fff',width:180,height:25}}>
                         <Icon name="ios-search" style={{color:'#fd7166'}}/>
                         <Input style={{color: '#00c497'}} placeholder="お悩みタグ"/>
                     </InputGroup>
                     */}
+                    {/*
                     <Item>
                         <Icon name="ios-search"/>
                         <Input placeholder="検索"/>
                     </Item>
-                    
+                    */}
                 </Header>
+                <ScrollView>
+                    {/*
+                    <View>{this.renderPics()}</View>
+                    */}
+                
+                <View style={{paddingLeft:20,paddingRight:20,paddingTop:30}}>
                 <DeckSwiper
                 onSwipeLeft={item=>this.incrementCardIndex()}
                 onSwipeRight={item=>this.decrementCardIndex()}
-            dataSource={cards}
-            renderItem={item =>
+                dataSource={cards}
+                renderItem={item =>
               <Card style={{ elevation: 3 }}>
+                <View>
+                <TouchableWithoutFeedback onPress={()=>this.changeBAstate()}>
+                <CardItem cardBody>
+                  <Image style={{ height: 300, flex: 1 }} source={item.image}/>
+                </CardItem>
+                </TouchableWithoutFeedback>
+                </View>
                 <CardItem>
                   <Left>
                     <Thumbnail source={item.image} />
@@ -125,28 +265,14 @@ class Home extends Component {
                     </Body>
                   </Left>
                 </CardItem>
-                <View>
-                <TouchableWithoutFeedback onPress={()=>this.changeBAstate()}>
-                <CardItem cardBody>
-                  <Image style={{ height: 300, flex: 1 }} source={item.image}/>
-                </CardItem>
-                </TouchableWithoutFeedback>
-                </View>
-                <CardItem>
-                  <Text>{item.name}</Text>
-                  {/*
-                  <TouchableOpacity>
-                    <Icon name='logo-twitter' style={{color:'#ed4a6a',marginLeft:150}}/>
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Icon name='logo-instagram' style={{color:'#ed4a6a'}}/>
-                  </TouchableOpacity>
-                  */}
-                </CardItem>
               </Card>
             }
           />
-          <View style = {{marginTop:420}}>
+          </View>
+          
+          
+          
+          <View style = {{marginTop:400}}>
                     {/*
                     <View style={{marginTop:30,flexDirection:'row'}}>
                         <View style={{flex:1}}>
@@ -174,12 +300,14 @@ class Home extends Component {
                             <Stylist imageUri={require('../../assets/photo4.jpg')}　/>
                         </ScrollView>
                     </View>
+                    {/*
                     <TouchableOpacity style={styles.buttonStyle} onPress={()=>this.navigateToProfile(Pics[0])}>
                         <Text 
                         style={styles.textStyle}>
                             詳細を見る
                         </Text>
                     </TouchableOpacity>
+                    */}
                     {/*
                     <TouchableOpacity onPress={()=>console.log(this.state.currentCard)}>
                     <View style={styles.buttonStyle}>
@@ -190,7 +318,6 @@ class Home extends Component {
                     </View>
                     </TouchableOpacity>
                     */}
-                    
                 </View>
                 </ScrollView>
           </Container>
@@ -211,7 +338,7 @@ const styles = StyleSheet.create({
         marginTop:10,
         marginLeft:130,
         marginRight:130,
-        backgroundColor:'#59D494',
+        backgroundColor:'#fd7166',
         borderRadius:15,
         borderWidth:1,
         borderColor:'#f8f8f8',
@@ -219,7 +346,7 @@ const styles = StyleSheet.create({
     },
     textStyle:{
         marginTop:5,
-        paddingLeft:15,
+        textAlign:'center',
         color:'#fff',
         fontSize:14,
     },
