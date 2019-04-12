@@ -97,7 +97,7 @@ class SideBar extends Component {
                         <Text style={styles.tagText}>パサつき</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.profileStyle}>
-                        <Text style={styles.tagText}>チンゲ</Text>
+                        <Text style={styles.tagText}>寝ぐせ</Text>
                     </TouchableOpacity>
                     </View>
                     {/*

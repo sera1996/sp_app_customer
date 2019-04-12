@@ -222,6 +222,7 @@ componentWillMount(){
                         <Button transparent onPress={this.openDrawer.bind(this)}>
                             <Icon style={styles.icon} name='list' />
                         </Button> 
+                        
                     </Left>
                     
                     {/*
@@ -241,8 +242,7 @@ componentWillMount(){
                     {/*
                     <View>{this.renderPics()}</View>
                     */}
-                
-                <View style={{paddingLeft:20,paddingRight:20,paddingTop:30}}>
+                <View style={{paddingLeft:20,paddingRight:20,paddingTop:15}}>
                 <DeckSwiper
                 onSwipeLeft={item=>this.incrementCardIndex()}
                 onSwipeRight={item=>this.decrementCardIndex()}
@@ -260,8 +260,12 @@ componentWillMount(){
                   <Left>
                     <Thumbnail source={item.image} />
                     <Body>
+                      <View style={{flexDirection:'row'}}>
+                      <View>
                       <Text>{item.text}</Text>
                       <Text note>@teraokayum</Text>
+                      </View>
+                      </View>
                     </Body>
                   </Left>
                 </CardItem>
@@ -272,7 +276,7 @@ componentWillMount(){
           
           
           
-          <View style = {{marginTop:400}}>
+          <View style = {{marginTop:380}}>
                     {/*
                     <View style={{marginTop:30,flexDirection:'row'}}>
                         <View style={{flex:1}}>
@@ -288,7 +292,7 @@ componentWillMount(){
                         </View>
                     </View>
                     */}
-                    <View style={{marginTop:30}}>
+                    <View style={{marginTop:20}}>
                         <ScrollView horizontal='true'>
                             <Stylist imageUri={require('../../assets/photo1.jpg')} />
                             <Stylist imageUri={require('../../assets/photo2.jpg')}　/>
@@ -300,14 +304,14 @@ componentWillMount(){
                             <Stylist imageUri={require('../../assets/photo4.jpg')}　/>
                         </ScrollView>
                     </View>
-                    {/*
+                    
                     <TouchableOpacity style={styles.buttonStyle} onPress={()=>this.navigateToProfile(Pics[0])}>
                         <Text 
                         style={styles.textStyle}>
                             詳細を見る
                         </Text>
                     </TouchableOpacity>
-                    */}
+                    
                     {/*
                     <TouchableOpacity onPress={()=>console.log(this.state.currentCard)}>
                     <View style={styles.buttonStyle}>
@@ -335,7 +339,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     buttonStyle:{
-        marginTop:10,
+        marginTop:20,
         marginLeft:130,
         marginRight:130,
         backgroundColor:'#fd7166',
