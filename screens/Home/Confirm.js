@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { 
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from "react-native";
 import { Container, Header, View, DeckSwiper, Card, 
     CardItem, Thumbnail, Text, Left, Body, Icon } from 'native-base';
@@ -10,6 +11,9 @@ import { Container, Header, View, DeckSwiper, Card,
 class Confirm extends Component {
     backToCalendar(){
         this.props.navigation.navigate('Calendars');
+    }
+    navigateToResComplete(){
+        this.props.navigation.navigate('ResComplete');
     }
     render() {
         return (
@@ -23,33 +27,40 @@ class Confirm extends Component {
                 </Header>
                 <View>
                 <Text style={{color:'#fd7166',fontSize:22,marginTop:30,marginLeft:20}}>予約確認</Text>
-                <View style={{flexDirection:'row',borderBottomWidth:0.5,marginTop:60,marginLeft:30,marginRight:30}}>
+                <ScrollView>
+                <View style={{flexDirection:'row',borderBottomWidth:0.5,marginTop:40,marginLeft:30,marginRight:30}}>
                     <Text style={{fontSize:12}}>氏名</Text>
                     <Text style={{marginLeft:120,fontSize:18}}>河野 勇輝</Text>
                 </View>
                 <View style={{flexDirection:'row',borderBottomWidth:0.5,marginTop:50,marginLeft:30,marginRight:30}}>
                     <Text style={{fontSize:12}}>電話番号</Text>
-                    <Text style={{marginLeft:80,fontSize:18}}>072-114-514</Text>
+                    <Text style={{marginLeft:80,fontSize:18}}>810-114-514</Text>
                 </View>
-                <View style={{marginLeft:30,marginTop:40}}>
+                <View style={{flexDirection:'row',borderBottomWidth:0.5,marginTop:50,marginLeft:30,marginRight:30}}>
+                    <Text style={{fontSize:12}}>予約日時</Text>
+                    <Text style={{marginLeft:80,fontSize:18}}>2019/08/10 11:45</Text>
+                </View>
+                <View style={{marginLeft:30,marginTop:20}}>
                     <Text style={{color:'#fd7166',fontSize:26}}>¥5000</Text>
                     <Text style={{fontSize:12}}>ヘアートリートメント</Text>
                 </View>
-                <View style={{marginLeft:30,marginRight:30,marginTop:40,backgroundColor:'#f2f2f2'}}>
+                <View style={{marginLeft:30,marginRight:30,marginTop:20,backgroundColor:'#f2f2f2'}}>
                     <Text style={{textAlign:'center',color:'#fd7166',paddingTop:10}}>注意事項</Text>
                     <Text style={{marginTop:20,fontSize:12,paddingLeft:10,paddingRight:10,paddingBottom:10}}>ご都合によるキャンセルの場合は、必ず事前にご連絡ください。当日のキャンセル
                         はカット代金の100%料金が発生します。ご都合によるキャンセルの場合は、必ず
-                        OneTWO!!!!
+                        ご連絡ください。
                     </Text>
                 </View>
                 <View>
-                    <TouchableOpacity style={{marginTop:40,marginLeft:120,marginRight:120,borderRadius:15,backgroundColor:'#59D494'}}>
+                    <TouchableOpacity onPress={()=>this.navigateToResComplete()}style={{marginTop:20,marginLeft:120,marginRight:120,borderRadius:15,backgroundColor:'#59D494'}}>
                         <Text style={{textAlign:'center',color:'white',marginTop:10,marginBottom:10}}>
                             予約
                         </Text>
                     </TouchableOpacity>
                 </View>
+                </ScrollView>
                 </View>
+                
             </Container>
         );
     }

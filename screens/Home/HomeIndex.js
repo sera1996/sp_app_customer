@@ -14,7 +14,7 @@ import Calendars from './Calendars';
 import Confirm from './Confirm';
 import Monsi from './Monsi';
 import ProductList from './ProductList';
-
+import ResComplete from './ResComplete';
 
 class Talon extends Component {
     render() {
@@ -67,6 +67,12 @@ const RootStack = createStackNavigator({
     },
     ProductList:{
         screen:ProductList,
+        navigationOptions:()=>({
+            header:null
+        })
+    },
+    ResComplete:{
+        screen:ResComplete,
         navigationOptions:()=>({
             header:null
         })

@@ -261,10 +261,12 @@ class Profile extends Component {
             return(
                 <View>
                     <View style={{backgroundColor:'#ffffff',marginRight:40,marginLeft:40,borderRadius:15,marginTop:25,paddingTop:10}}>
+                        {/*
                         <Text style={{marginLeft:30,marginRight:30,marginBottom:10,fontSize:14}}>
                             インスタグラムで人気のウルフカットです。襟足を重めに残して、切りっぱなし感を残してウルフボブ。
                             切りっぱなしボブに飽きた方オススメのウルフカット！
                         </Text>
+                        */}
                         <MyAppText style={{fontSize:14}}>
                             インスタグラムで人気のウルフカットです。襟足を重めに残して、切りっぱなし感を残してウルフボブ。
                             切りっぱなしボブに飽きた方オススメのウルフカット！
